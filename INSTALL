@@ -1,0 +1,17 @@
+Install pip:
+  sudo easy_install pip
+
+Add to your ~/.(ba|z)shrc:
+  export COUSINADE_DIR="/path/to/this/dir"
+  export COUSINADE_SETTINGS="settings.dev" # can be switched to settings.personal
+  . $COUSINADE_DIR/scripts/bashrc
+
+Install requirements:
+  sudo pip install -r $COUSINADE_DIR/requirements.txt
+
+Create the database:
+  cousinade syncdb
+
+
+You can now start the server with 'cousinade runserver' and see your development site at http://127.0.0.1:8000
+You can cd to your dev directory with 'cousinade'

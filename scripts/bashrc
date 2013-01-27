@@ -1,0 +1,13 @@
+function cousinade() {
+    CD=`pwd`
+    pushd $COUSINADE_DIR;
+    if [ $1 ]
+    then
+        ./manage.py $@;
+        if [ "$CD" != "`pwd`" ]
+        then
+            popd;
+        fi
+    fi
+    unset CD;
+}
