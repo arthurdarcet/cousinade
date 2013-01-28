@@ -33,7 +33,7 @@ class PersonForm(forms.ModelForm):
         self.fields['title'].label = 'Titre'
         self.fields['first_name'].label = 'Prénom'
         self.fields['last_name'].label = 'Nom'
-        self.fields['maiden_name'].label = 'Nom'
+        self.fields['maiden_name'].label = 'Nom de jeune fille'
         self.fields['email'].label = 'E-mail'
         self.fields['phone'].label = 'Téléphone'
         self.fields['birth_date'].label = 'Date de naissance'
