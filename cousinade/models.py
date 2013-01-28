@@ -71,7 +71,7 @@ class Person(models.Model):
     def birth(self):
         bdate = formats.date_format(self.birth_date, 'SHORT_DATE_FORMAT') if self.birth_date else None
         if bdate and self.birth_place:
-            return '{} à {}'.format(bdate, self.birth_place)
+            return u'{} à {}'.format(bdate, self.birth_place)
         return bdate or '−'
 
     def __unicode__(self):

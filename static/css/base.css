@@ -80,9 +80,6 @@ input, select, textarea {
 #listing {
     width: 100%;
 }
-#listing .color-2 td {
-    background-color: #F0FAFF;
-}
 .edit img {
     width: 15px;
 }

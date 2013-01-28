@@ -54,11 +54,18 @@ class PersonForm(forms.ModelForm):
     def clean_email(self):
         return self.cleaned_data['email'] or None
 
+    @staticmethod
+    def cap_first(s):
+        return s[0].upper() + s[1:] if len(s) > 1 else s
+
     def clean_first_name(self):
-        return self.cleaned_data['first_name'].capitalize()
+        return PersonForm.cap_first(self.cleaned_data['first_name'])
 
     def clean_last_name(self):
-        return self.cleaned_data['last_name'].capitalize()
+        return PersonForm.cap_first(self.cleaned_data['last_name'])
+
+    def clean_maiden_name(self):
+        return PersonForm.cap_first(self.cleaned_data['maiden_name'])
 
 
 
