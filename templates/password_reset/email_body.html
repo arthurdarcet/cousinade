@@ -1,5 +1,5 @@
 {% autoescape off %}
-Vous avez demandé la (ré)initialisation de votre mot de passe sur le site {{ site_name }}.
+Vous avez demandé la (ré)initialisation de votre mot de passe sur le site de la {{ site_name }}.
 
 Veuillez suivre ce lien pour choisir un nouveau mot de passe :
 {{ protocol }}://{{ domain }}{% url cousinade.views.do_password_reset uidb36=uid, token=token %}

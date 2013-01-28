@@ -61,13 +61,10 @@ INSTALLED_APPS = (
     'cousinade',
 )
 
-PASSWORD_RESET_FROM = 'no-reply@you'
-
-SITE_NAME = 'Cousinade'
-BASE_URL = '127.0.0.1:8000'
-
 LOGIN_URL = '/login'
 LOGIN_EXEMPT_URLS = ['password/request', 'password/do']
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 SESSION_EXPIRE = 60*20
+
+EMAIL_SUBJECT_PREFIX = '[Cousinade admin] '

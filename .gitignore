@@ -1,7 +1,5 @@
-cousinade/settings/*.py
-!cousinade/settings/__init__.py
-!cousinade/settings/base.py
-!cousinade/settings/dev.py
+settings/personal.py
 media/
 *.pyc
 *.db
+env/
