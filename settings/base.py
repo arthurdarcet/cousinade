@@ -62,7 +62,7 @@ INSTALLED_APPS = (
 )
 
 LOGIN_URL = '/login'
-LOGIN_EXEMPT_URLS = ['password/request', 'password/do']
+LOGIN_EXEMPT_URLS = ['password/request', 'password/do', 'static/']
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 SESSION_EXPIRE = 60*20

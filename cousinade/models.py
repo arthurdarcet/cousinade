@@ -25,7 +25,7 @@ class Person(models.Model):
     maiden_name = models.CharField(max_length=100, blank=True, null=True)
     title = models.IntegerField(choices=TITLES)
     email = models.EmailField(unique=True, blank=True, null=True)
-    phone = models.CharField(max_length=15, blank=True, null=True)
+    phone = models.CharField(max_length=30, blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True)
     picture = ImageWithThumbsField(upload_to='pictures', sizes=PICTURE_THUMBNAILS, blank=True, null=True)
     father = models.ForeignKey(
