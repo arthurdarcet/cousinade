@@ -1,5 +1,57 @@
 {% extends "base.html" %}
 {% load render_table from django_tables2 %}
+{% block js %}
+    {{ block.super }}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#listing").tablesorter();
+            $(".thumbails").yoxview();
+            $('.info').click(function(){
+                $(this).html($(this).data('all'));
+            });
+        });
+    </script>
+{% endblock %}
 {% block body %}
-    {% render_table objects %}
+<table cellspacing="1" id="listing" class="tablesorter">
+<thead>
+    <tr>
+        <th class="{sorter: false}"></th>
+        <th class="{sorter: false}"></th>
+        <th>Nom</th>
+        <th>E-Mail</th>
+        <th>Téléphone</th>
+        <th>Date de naissance</th>
+        <th>Père</th>
+        <th>Mère</th>
+        <th class="{sorter: false}">−</th>
+    </tr>
+</thead>
+<tbody>
+    {% for o in objects %}
+    <tr class="color-{% cycle "1" "2" %}">
+        <td class="edit"><a href="{% url cousinade.views.edit o.id %}">
+            <img src="{{ STATIC_URL }}/images/edit.png" alt="edit" />
+        </a></td>
+        {% if o.picture %}
+        <td class="thumbails"><a href="{{ o.picture.url }}">
+            <img src="{{ o.picture.url_50x50 }}" alt="edit" />
+        </a></td>
+        {% else %}
+        <td></td>
+        {% endif %}
+        <td>{{ o }}</td>
+        <td>
+            {% if o.email %}<a href="mailto:{{ o.email }}">{{ o.email }}</a>
+            {% else %}−{% endif %}
+        </td>
+        <td>{{ o.phone }}</td>
+        <td>{{ o.birth_date|default:"−" }}</td>
+        <td>{{ o.father|default:"−" }}</td>
+        <td>{{ o.mother|default:"−" }}</td>
+        <td class="info" data-all="{{ o.info }}">{{ o.info|truncatewords:15 }}</td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
 {% endblock %}

@@ -4,11 +4,14 @@
     <head>
         <title>{% block title %}Cousinade{% endblock %}</title>
         {% block css %}
+            {% css "lib/jquery.tablesorter.css" %}
             {% css "base.css" %}
-            <link rel="stylesheet" href="{{ STATIC_URL }}django_tables2/themes/paleblue/css/screen.css" />
         {% endblock %}
         {% block js %}
             {% js "lib/jquery.js" %}
+            {% js "lib/jquery.metadata.js" %}
+            {% js "lib/jquery.tablesorter.min.js" %}
+            {% js "lib/jquery.yoxview.min.js" %}
             {% js "common.js" %}
             <script type="text/javascript">
                 function search(){
@@ -22,7 +25,7 @@
     <body>
         {% if request.user %}
             <ul class="nav-bar">
-                <li><a href="{% url cousinade.views.tree %}">Vue en arbre</a></li>
+                <!--<li><a href="{% url cousinade.views.tree %}">Vue en arbre</a></li>-->
                 <li><a href="{% url cousinade.views.index %}">Vue en liste</a></li>
                 <li><a href="{% url cousinade.views.edit %}">Ajouter une personne</a></li>
                 <li><a href="{% url cousinade.views.do_password_reset %}">Changer de mot de passe</a></li>

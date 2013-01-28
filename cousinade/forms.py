@@ -13,8 +13,10 @@ class PersonForm(forms.ModelForm):
     class Meta:
         model = Person
         fields = (
+            'title',
             'first_name',
             'last_name',
+            'maiden_name',
             'email',
             'phone',
             'birth_date',
@@ -28,8 +30,10 @@ class PersonForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(PersonForm, self).__init__(*args, **kwargs)
+        self.fields['title'].label = 'Titre'
         self.fields['first_name'].label = 'Prénom'
         self.fields['last_name'].label = 'Nom'
+        self.fields['maiden_name'].label = 'Nom'
         self.fields['email'].label = 'E-mail'
         self.fields['phone'].label = 'Téléphone'
         self.fields['birth_date'].label = 'Date de naissance'

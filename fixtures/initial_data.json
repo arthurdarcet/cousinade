@@ -6,6 +6,8 @@
         "picture": "",
         "first_name": "test",
         "last_name": "test",
+        "maiden_name": "",
+        "title": 3,
         "father": null,
         "phone": "",
         "last_login":

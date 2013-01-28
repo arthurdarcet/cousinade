@@ -21,7 +21,7 @@ class Backend(object):
             user = Person.objects.get(email__iexact=email)
             if user.check_password(password):
                 return user
-        except UserModel.DoesNotExist:
+        except Person.DoesNotExist:
             return None
 
     @staticmethod

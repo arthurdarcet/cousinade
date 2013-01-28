@@ -19,9 +19,6 @@ def index(request):
         objects = Person.search(request.GET['search'])
     else:
         objects = Person.objects.all()
-    if hasattr(request.GET, 'order_by'):
-        objects = objects.order_by(request.GET['order_by'])
-
     return render(request, 'index.html', {'objects': Person.objects.all()})
 
 def tree(request):
