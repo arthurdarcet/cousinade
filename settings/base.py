@@ -1,4 +1,6 @@
-SITE_ROOT = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+import os
+
+SRC_ROOT = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
 TIME_ZONE = 'Europe/Paris'
 LANGUAGE_CODE = 'en-us'
@@ -6,20 +8,18 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-
-STATIC_ROOT = os.path.join(SITE_ROOT, 'static')
+STATIC_ROOT = os.path.join(SRC_ROOT, 'static')
 STATIC_URL = '/static/'
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 SECRET_KEY = 'rezk$80u7u1+n+61arn5))z%8&amp;vhg@^sg71j!o+a4evjq*e6!7'
 
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+COMPRESS_PRECOMPILERS = (
+    ('text/less', 'lessc {infile} {outfile}'),
 )
 
 MIDDLEWARE_CLASSES = (
@@ -33,13 +33,9 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'cousinade.urls'
-WSGI_APPLICATION = 'cousinade.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
+TEMPLATE_DIRS = (os.path.join(SRC_ROOT, 'templates'),)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -48,5 +44,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'django.contrib.admin',
+    'django.contrib.admin',
+    'compressor',
+    'cousinade',
 )

@@ -1,0 +1,18 @@
+{% load html %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}Cousinade{% endblock %}</title>
+        {% block css %}
+            {% css "base.css" %}
+        {% endblock %}
+        {% block js %}
+            {% js "lib/jquery.js" %}
+            {% js "common.js" %}
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>

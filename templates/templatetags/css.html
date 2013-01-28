@@ -1,0 +1,7 @@
+{% load compress static %}
+
+{% compress css %}
+    {% for o in l %}
+        <link type="text/{{ o.mime }}" href="{% static o.extension|add:"/"|add:o.path %}" charset="utf-8" rel="stylesheet">
+    {% endfor %}
+{% endcompress %}

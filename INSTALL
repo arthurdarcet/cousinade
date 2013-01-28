@@ -7,7 +7,7 @@ Add to your ~/.(ba|z)shrc:
   . $COUSINADE_DIR/scripts/bashrc
 
 Install requirements:
-  sudo pip install -r $COUSINADE_DIR/requirements.txt
+  sudo pip install -r $COUSINADE_DIR/requirements.pip
 
 Create the database:
   cousinade syncdb
