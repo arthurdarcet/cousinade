@@ -1,0 +1,77 @@
+.nav-bar li {
+    display: inline;
+    margin-top: 5px;
+    margin-right: 40px;
+    float: left;
+}
+.nav-bar li:last-child {
+    float: right;
+    margin: 0;
+}
+.nav-bar {
+    padding: 5px;
+    margin: 0;
+    height: 30px;
+    background-color: #505050;
+}
+.nav-bar a {
+    color: #fafafa;
+}
+.nav-bar a:hover {
+    color: #fff270;
+}
+a {
+    text-decoration: none;
+    color: #1010aa;
+}
+a:hover {
+    color: #4040ee;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-size: small;
+}
+#content {
+    margin:10px;
+}
+
+input, select, textarea {
+    width: 100%;
+}
+#search-field, #search-button, input[type=checkbox] {
+    width: auto;
+}
+
+.form-table tr > td:first-child {
+    text-align: right;
+}
+.form-table tr > td:last-child {
+    text-align: left;
+}
+
+.messages li {
+    list-style: none;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+.messages {
+    width: 100%;
+    padding: 0;
+}
+.messages .success {
+    background-color: #30aa30;
+}
+.messages .warning {
+    background-color: red;
+}
+.messages .info {
+    background-color: blue;
+}
+
+.errorlist li {
+    list-style: none;
+    color: red;
+}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block body %}
+<form method="post" action="#" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>{{ form.non_field_errors }}</p>
+    <table class='form-table'>
+        {% for field in form %}
+        <tr>
+            <td>{{ field.label_tag }} : </td>
+            <td>{{ field }}</td>
+            <td>{{ field.errors }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td><input type="submit" value="{{ submit }}" /></td>
+            <td><td>
+        </tr>
+        {% block extra %}{% endblock %}
+    </table>
+</form>
+{% endblock %}

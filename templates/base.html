@@ -5,14 +5,43 @@
         <title>{% block title %}Cousinade{% endblock %}</title>
         {% block css %}
             {% css "base.css" %}
+            <link rel="stylesheet" href="{{ STATIC_URL }}django_tables2/themes/paleblue/css/screen.css" />
         {% endblock %}
         {% block js %}
             {% js "lib/jquery.js" %}
             {% js "common.js" %}
+            <script type="text/javascript">
+                function search(){
+                    var val = $('#search-field').val();
+                    if(val != '')
+                        location.href = '{% url cousinade.views.search "__SEARCH__" %}'.replace('__SEARCH__', val);
+                }
+            </script>
         {% endblock %}
     </head>
     <body>
+        {% if request.user %}
+            <ul class="nav-bar">
+                <li><a href="{% url cousinade.views.tree %}">Vue en arbre</a></li>
+                <li><a href="{% url cousinade.views.index %}">Vue en liste</a></li>
+                <li><a href="{% url cousinade.views.edit %}">Ajouter une personne</a></li>
+                <li><a href="{% url cousinade.views.do_password_reset %}">Changer de mot de passe</a></li>
+                <li>
+                    <input type="text" id="search-field" />
+                    <input type="button" value="Rechercher" onclick="search()" id="search-button" />
+                </li>
+            </ul>
+        {% endif %}
+        <div id="content">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         {% block body %}
         {% endblock %}
+        </div>
     </body>
 </html>

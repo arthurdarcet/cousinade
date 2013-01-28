@@ -1,0 +1,18 @@
+[{
+    "pk": 1,
+    "model": "cousinade.person",
+    "fields": {
+        "info": "",
+        "picture": "",
+        "first_name": "test",
+        "last_name": "test",
+        "father": null,
+        "phone": "",
+        "last_login":
+        "2013-01-28T14:52:53.019",
+        "mother": null,
+        "birth_date": null,
+        "password": "pbkdf2_sha256$10000$cfHN65Lusmhk$YQa3PgYXNXpnETvAWAtvcXOJNKE1UDUIOC8vC5Vv1tM=",
+        "email": "test@cousinade.fr"
+    }
+}]

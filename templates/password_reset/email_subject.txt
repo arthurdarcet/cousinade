@@ -1,0 +1,1 @@
+Réinitialisation de votre mot de passe pour le site {{ site_name }}
