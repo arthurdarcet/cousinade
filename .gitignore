@@ -1,5 +1,6 @@
 settings/personal.py
 media/
+static/CACHE
 *.pyc
 *.db
 env/

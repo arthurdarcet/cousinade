@@ -21,6 +21,7 @@
         <th>Nom</th>
         <th>E-Mail</th>
         <th>Téléphone</th>
+        <th>Adresse</th>
         <th>Date de naissance</th>
         <th>Père</th>
         <th>Mère</th>
@@ -46,8 +47,19 @@
             {% if o.email %}<a href="mailto:{{ o.email }}">{{ o.email }}</a>
             {% else %}−{% endif %}
         </td>
-        <td>{{ o.phone }}</td>
-        <td>{{ o.birth_date|default:"−" }}</td>
+        <td>
+            {{ o.phone }}
+            {% if o.phone2 %}
+            <br>{{ o.phone2 }}
+            {% endif %}
+        </td>
+        <td>
+            {{ o.address }}
+            {% if o.address2 %}
+            <br>{{ o.address2 }}
+            {% endif %}
+        </td>
+        <td>{{ o.birth|default:"−" }}</td>
         <td>{{ o.father|default:"−" }}</td>
         <td>{{ o.mother|default:"−" }}</td>
         <td class="info" data-all="{{ o.info }}">{{ o.info|truncatewords:15 }}</td>

@@ -18,8 +18,12 @@ class PersonForm(forms.ModelForm):
             'last_name',
             'maiden_name',
             'email',
+            'address',
+            'address2',
             'phone',
+            'phone2',
             'birth_date',
+            'birth_place',
             'picture',
             'father',
             'mother',
@@ -35,8 +39,12 @@ class PersonForm(forms.ModelForm):
         self.fields['last_name'].label = 'Nom'
         self.fields['maiden_name'].label = 'Nom de jeune fille'
         self.fields['email'].label = 'E-mail'
+        self.fields['address'].label = 'Adresse'
+        self.fields['address2'].label = 'Adresse (bis)'
         self.fields['phone'].label = 'Téléphone'
+        self.fields['phone2'].label = 'Téléphone (bis)'
         self.fields['birth_date'].label = 'Date de naissance'
+        self.fields['birth_place'].label = 'Lieu de naissance'
         self.fields['picture'].label = 'Photo'
         self.fields['father'].label = 'Père'
         self.fields['mother'].label = 'Mère'
