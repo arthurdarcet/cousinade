@@ -5,13 +5,14 @@
         <title>{% block title %}Cousinade{% endblock %}</title>
         {% block css %}
             {% css "lib/jquery.tablesorter.css" %}
+            {% css "lib/jquery.lightbox.css" %}
             {% css "base.css" %}
         {% endblock %}
         {% block js %}
             {% js "lib/jquery.js" %}
             {% js "lib/jquery.metadata.js" %}
             {% js "lib/jquery.tablesorter.min.js" %}
-            {% js "lib/jquery.yoxview.min.js" %}
+            {% js "lib/jquery.lightbox.js" %}
             {% js "common.js" %}
             <script type="text/javascript">
                 function search(){

@@ -4,6 +4,7 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
     url(r'static/(?P<path>.*)', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+    url(r'media/(?P<path>.*)', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     url(r'^$', 'cousinade.views.index'),
     url(r'^tree$', 'cousinade.views.tree'),
     url(r'^search/(.+)$', 'cousinade.views.search'),

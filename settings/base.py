@@ -12,6 +12,9 @@ USE_L10N = True
 
 STATIC_ROOT = os.path.join(SRC_ROOT, 'static')
 STATIC_URL = '/static/'
+# static for our static files, media for user-uploaded pictures
+MEDIA_ROOT = os.path.join(SRC_ROOT, 'media')
+MEDIA_URL = '/media/'
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',

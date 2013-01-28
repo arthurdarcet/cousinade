@@ -32,8 +32,9 @@ def edit(request, pk=None):
 
     form = PersonForm(instance=person)
     if request.POST:
-        form = PersonForm(request.POST, instance=person)
+        form = PersonForm(request.POST, request.FILES, instance=person)
         if form.is_valid():
+            print request.POST
             form.save()
             messages.success(request, 'Modification effectuée' if person else 'Ajout effectué')
             return redirect('cousinade.views.edit' if request.POST.get('continue-add', None) else 'cousinade.views.index')

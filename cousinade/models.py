@@ -18,7 +18,7 @@ class Person(models.Model):
         (TITLE_MRS, 'Mme'),
         (TITLE_MR, 'M.'),
     )
-    PICTURE_THUMBAILS = ((50,50), (300,300))
+    PICTURE_THUMBNAILS = ((50,50), (200,200), (400,400))
 
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -27,7 +27,7 @@ class Person(models.Model):
     email = models.EmailField(unique=True, blank=True, null=True)
     phone = models.CharField(max_length=15, blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True)
-    picture = models.ImageWithThumbsField(upload_to='pictures', size=PICTURE_THUMBAILS, blank=True, null=True)
+    picture = ImageWithThumbsField(upload_to='pictures', sizes=PICTURE_THUMBNAILS, blank=True, null=True)
     father = models.ForeignKey(
         'self',
         related_name='+',
@@ -64,4 +64,4 @@ class Person(models.Model):
         return check_password(raw_password, self.password, setter)
 
     def __unicode__(self):
-        return u'{} {} {}'.format(dict(Person.TITLES_SHORT)[self.title], self.first_name, self.last_name)
+        return u'{} {}'.format(self.first_name, self.last_name)
