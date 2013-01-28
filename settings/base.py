@@ -46,5 +46,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'compressor',
+    'django_tables2',
     'cousinade',
 )
