@@ -10,11 +10,17 @@
             });
             $('#listing').tableFilter({
                 additionalFilterTriggers: [$('#search-field')],
-                filterDelay: '100ms'
+                filterDelay: '100ms',
+                enableCookies: false,
+                clearFiltersControls: [$('#search-reset')]
             });
             $(".thumbnails a").lightBox();
             $('.info').click(function(){
                 $(this).html($(this).data('all'));
+            });
+            $('#search-field').change(function(){
+                if($(this).val() == '')
+                    $('#search-reset').click();
             });
         });
     </script>
@@ -23,6 +29,7 @@
 <li><input type="text" id="search-field" /></li>
 {% endblock %}
 {% block body %}
+<div id="search-reset" style="display: none;"></div>
 <table cellspacing="1" id="listing" class="tablesorter">
 <thead>
     <tr>
@@ -31,7 +38,7 @@
         <th>Prénom</th>
         <th>Nom</th>
         <th>E-Mail</th>
-        <th>Téléphone</th>
+        <th style="min-width: 110px;">Téléphone</th>
         <th>Adresse</th>
         <th>Date de naissance</th>
         <th filter="false">Père</th>
@@ -53,7 +60,12 @@
         <td></td>
         {% endif %}
         <td>{{ o.first_name }}</td>
-        <td>{{ o.last_name }}</td>
+        <td>
+            {{ o.last_name }}
+            {% if o.maiden_name and o.last_name != o.maiden_name %}
+            (née {{ o.maiden_name }})
+            {% endif %}
+        </td>
         <td>
             {% if o.email %}<a href="mailto:{{ o.email }}">{{ o.email }}</a>
             {% else %}−{% endif %}
