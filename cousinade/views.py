@@ -15,10 +15,6 @@ from models import Person
 
 
 def index(request):
-    if hasattr(request.GET, 'search'):
-        objects = Person.search(request.GET['search'])
-    else:
-        objects = Person.objects.all()
     return render(request, 'index.html', {'objects': Person.objects.all()})
 
 def tree(request):
@@ -39,9 +35,6 @@ def edit(request, pk=None):
             return redirect('cousinade.views.edit' if form.cleaned_data.get('continue_add') else 'cousinade.views.index')
 
     return render(request, 'form.html', {'form': form, 'submit': 'Sauvegarder'})
-
-def search(request, search):
-    pass
 
 @sensitive_post_parameters()
 def login(request):

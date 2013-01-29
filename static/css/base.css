@@ -9,8 +9,7 @@
     margin: 0;
 }
 .nav-bar {
-    padding: 5px;
-    padding-left: 40px;
+    padding: 3px 6px 3px 20px;
     margin: 0;
     height: 30px;
     background-color: #505050;
@@ -40,8 +39,21 @@ body {
 input, select, textarea {
     width: 100%;
 }
-#search-field, #search-button, input[type=checkbox] {
+textarea {
+    height: 60px;
+}
+input[type=checkbox] {
     width: auto;
+}
+#search-field {
+    background: url(../images/search.png) no-repeat 5px 3px #fcfcfc;
+    border: 1px solid #d1d1d1;
+    margin-top:1px;
+    font-weight: bold;
+    padding-left: 25px;
+    height: 20px;
+    border-radius: 4px;
+    width: 250px;
 }
 
 .form-table tr > td:first-child {
@@ -88,4 +100,7 @@ input, select, textarea {
 }
 .thumbnails {
     width: 50px;
+}
+.filters {
+    display: none;
 }

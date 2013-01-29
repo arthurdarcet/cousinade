@@ -12,15 +12,8 @@
             {% js "lib/jquery.js" %}
             {% js "lib/jquery.metadata.js" %}
             {% js "lib/jquery.tablesorter.min.js" %}
+            {% js "lib/picnet.table.filter.min.js" %}
             {% js "lib/jquery.lightbox.js" %}
-            {% js "common.js" %}
-            <script type="text/javascript">
-                function search(){
-                    var val = $('#search-field').val();
-                    if(val != '')
-                        location.href = '{% url cousinade.views.search "__SEARCH__" %}'.replace('__SEARCH__', val);
-                }
-            </script>
         {% endblock %}
     </head>
     <body>
@@ -31,10 +24,7 @@
                 <li><a href="{% url cousinade.views.edit %}">Ajouter une personne</a></li>
                 <li><a href="{% url cousinade.views.do_password_reset %}">Changer de mot de passe</a></li>
                 <li><a href="{% url cousinade.views.logout %}">Se déconnecter</a></li>
-                <li>
-                    <input type="text" id="search-field" />
-                    <input type="button" value="Rechercher" onclick="search()" id="search-button" />
-                </li>
+                {% block last_menu_li %}<li></li>{% endblock %}
             </ul>
         {% endif %}
         <div id="content">

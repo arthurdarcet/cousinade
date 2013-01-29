@@ -3,13 +3,24 @@
     {{ block.super }}
     <script type="text/javascript">
         $(document).ready(function(){
-            $("#listing").tablesorter({sortList: [[3,0], [2,0]]});
+            $("#listing").tablesorter({
+                widgets: ['zebra'],
+                sortList: [[3,0], [2,0]],
+                widthFixed : true
+            });
+            $('#listing').tableFilter({
+                additionalFilterTriggers: [$('#search-field')],
+                filterDelay: '100ms'
+            });
             $(".thumbnails a").lightBox();
             $('.info').click(function(){
                 $(this).html($(this).data('all'));
             });
         });
     </script>
+{% endblock %}
+{% block last_menu_li %}
+<li><input type="text" id="search-field" /></li>
 {% endblock %}
 {% block body %}
 <table cellspacing="1" id="listing" class="tablesorter">
@@ -23,8 +34,8 @@
         <th>Téléphone</th>
         <th>Adresse</th>
         <th>Date de naissance</th>
-        <th>Père</th>
-        <th>Mère</th>
+        <th filter="false">Père</th>
+        <th filter="false">Mère</th>
         <th class="{sorter: false}">−</th>
     </tr>
 </thead>
