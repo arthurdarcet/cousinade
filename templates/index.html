@@ -49,9 +49,12 @@
 <tbody>
     {% for o in objects %}
     <tr>
-        <td class="edit"><a href="{% url cousinade.views.edit o.id %}">
-            <img src="{{ STATIC_URL }}/images/edit.png" alt="edit" />
-        </a></td>
+        <td class="edit">
+            <a href="{% url cousinade.views.edit o.id %}">
+                <img src="{{ STATIC_URL }}/images/edit.png" alt="edit" />
+            </a>
+            <span style="display: none;">{{ o }}</span>
+        </td>
         {% if o.picture %}
         <td class="thumbnails"><a href="{{ o.picture.url_400x400 }}">
             <img src="{{ o.picture.url_50x50 }}" alt="edit" />
