@@ -2,12 +2,14 @@
 """
 django-thumbs by Antonio Melé
 http://django.es
+
+Modified by Arthur Darcet to support on demand resizing
 """
 from django.db.models import ImageField
 from django.db.models.fields.files import ImageFieldFile
 from PIL import Image
 from django.core.files.base import ContentFile
-import cStringIO
+import cStringIO, re
 
 def generate_thumb(img, thumb_size, format):
     """
@@ -61,55 +63,32 @@ def generate_thumb(img, thumb_size, format):
     return ContentFile(io.getvalue())
 
 class ImageWithThumbsFieldFile(ImageFieldFile):
-    """
-    See ImageWithThumbsField for usage example
-    """
-    def __init__(self, *args, **kwargs):
-        super(ImageWithThumbsFieldFile, self).__init__(*args, **kwargs)
-        self.sizes = self.field.sizes
+    @staticmethod
+    def _get_for_size(s, (w,h)):
+        split = s.rsplit('.',1)
+        return u'{}.{}x{}.{}'.format(split[0],w,h,split[1])
 
-        if self.sizes:
-            def get_size(self, size):
-                if not self:
-                    return ''
-                else:
-                    split = self.url.rsplit('.',1)
-                    thumb_url = '%s.%sx%s.%s' % (split[0],w,h,split[1])
-                    return thumb_url
-
-            for size in self.sizes:
-                (w,h) = size
-                setattr(self, 'url_%sx%s' % (w,h), get_size(self, size))
-
-    def save(self, name, content, save=True):
-        super(ImageWithThumbsFieldFile, self).save(name, content, save)
-
-        if self.sizes:
-            for size in self.sizes:
-                (w,h) = size
-                split = self.name.rsplit('.',1)
-                thumb_name = '%s.%sx%s.%s' % (split[0],w,h,split[1])
-
-                # you can use another thumbnailing function if you like
-                thumb_content = generate_thumb(content, size, split[1])
-
-                thumb_name_ = self.storage.save(thumb_name, thumb_content)
-
-                if not thumb_name == thumb_name_:
-                    raise ValueError('There is already a file named %s' % thumb_name)
+    def __getattr__(self, attr):
+        s = attr.split('url_')
+        if len(s) != 2 or 'x' not in s[1]:
+            raise AttributeError
+        size = map(int, s[1].split('x',1))
+        name = ImageWithThumbsFieldFile._get_for_size(self.name, size)
+        url = ImageWithThumbsFieldFile._get_for_size(self.url, size)
+        if not self.storage.exists(name):
+            thumb_content = generate_thumb(self, size, name.rsplit('.',1)[1])
+            self.storage.save(name, thumb_content)
+        return url
 
     def delete(self, save=True):
-        name=self.name
+        directory, name = self.name.rsplit('/', 1)
+        _, files = self.storage.listdir(directory)
+        reg = re.compile(r'{}.[0-9]+x[0-9]+.{}'.format(*name.rsplit('.',1)))
+        for f in files:
+            if reg.match(f):
+                self.storage.delete(u'{}/{}'.format(directory, f))
         super(ImageWithThumbsFieldFile, self).delete(save)
-        if self.sizes:
-            for size in self.sizes:
-                (w,h) = size
-                split = name.rsplit('.',1)
-                thumb_name = '%s.%sx%s.%s' % (split[0],w,h,split[1])
-                try:
-                    self.storage.delete(thumb_name)
-                except:
-                    pass
+
 
 class ImageWithThumbsField(ImageField):
     attr_class = ImageWithThumbsFieldFile
@@ -155,10 +134,9 @@ class ImageWithThumbsField(ImageField):
     Add method to regenerate thubmnails
 
     """
-    def __init__(self, verbose_name=None, name=None, width_field=None, height_field=None, sizes=None, **kwargs):
+    def __init__(self, verbose_name=None, name=None, width_field=None, height_field=None, **kwargs):
         self.verbose_name=verbose_name
         self.name=name
         self.width_field=width_field
         self.height_field=height_field
-        self.sizes = sizes
         super(ImageField, self).__init__(**kwargs)
