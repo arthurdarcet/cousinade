@@ -1,4 +1,5 @@
 # coding: utf-8
+from collections import defaultdict
 from urlparse import urlparse
 
 from django.conf import settings
@@ -18,7 +19,25 @@ def index(request):
     return render(request, 'index.html', {'objects': Person.objects.all()})
 
 def tree(request):
-    pass
+    """Support multiple partners by duplicating the common parent"""
+    def childs(p, h):
+        ret = []
+        for c in Person.objects.children(p,h):
+            has_childs = False
+            for cp in c.partners():
+                has_childs = True
+                ret.append((c,cp,childs(c,cp)))
+            if not has_childs:
+                ret.append((c,None,[]))
+        return ret
+
+    tree = []
+    roots = set()
+    for p in Person.objects.filter(mother=None, father=None):
+        for h in p.partners():
+            if h is None or (h.mother is None and h.father is None and p.id > h.id):
+                tree.append((p,h,childs(p,h)))
+    return render(request, 'tree.html', {'objects': tree})
 
 def edit(request, pk=None):
     try:

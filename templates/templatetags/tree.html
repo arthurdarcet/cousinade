@@ -1,0 +1,25 @@
+{% load tree %}
+[
+{% for p1,p2,childs in objects %}
+{# p1 is not None, p2 might be and childs is a list #}
+    {
+        id: "{{ p1.pk }}-{{ p2.pk }}",
+        name: {
+            height: 1{% if p2 %}+1{% endif %},
+            names: ["{{ p1 }}", "{{ p2 }}"],
+            maiden_names: ["{% if p1.maiden_name and p1.maiden_name != p1.last_name %}(née {{ p1.maiden_name }}){% endif %}", "{% if p2.maiden_name and p2.maiden_name != p2.last_name %}(née {{ p2.maiden_name }}){% endif %}"],
+            images: ["{{ p1.picture.url_50x50 }}", "{{ p2.picture.url_50x50 }}"],
+            birth_dates: ["{{ p1.birth_date|default:"" }}", "{{ p2.birth_date|default:"" }}"],
+            images_large: ["{{ p1.picture.url_140x140 }}", "{{ p2.picture.url_140x140 }}"],
+            phones: ["{{ p1.phone1|default:"" }}", "{{ p2.phone1|default:"" }}"],
+            emails: ["{{ p1.email|default:"" }}", "{{ p2.email|default:"" }}"],
+            infos: ["{{ p1.info|default:"" }}", "{{ p2.info|default:"" }}"]
+        },
+        data: {
+            '$width': 104 + 54{% if p2 %}*2{% endif %},
+            '$color': '{%if p2 %}#F7FAC6{% elif p1.title == p1.TITLE_MR %}#EBEDFF{% else %}#FFEBEC{% endif %}',
+        },
+        children: {% tree childs %}
+    }{% if not forloop.last %},{% endif %}
+{% endfor %}
+]

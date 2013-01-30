@@ -1,18 +1,22 @@
 .nav-bar li {
     display: inline;
-    margin-top: 5px;
-    margin-right: 40px;
+    margin: 8px 5px 0 30px;
     float: left;
 }
 .nav-bar li:last-child {
     float: right;
-    margin: 0;
+    margin-top: 3px;
 }
 .nav-bar {
-    padding: 3px 6px 3px 20px;
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    padding: 0;
     margin: 0;
-    height: 30px;
-    background-color: #505050;
+    height: 35px;
+    background-color: #444;
+    z-index: 1000;
 }
 .nav-bar a {
     color: #fafafa;
@@ -32,8 +36,16 @@ body {
     padding: 0;
     font-size: small;
 }
+#content-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    padding-top: 35px;
+    width: 100%;
+}
 #content {
-    margin:10px;
+    padding: 0 10px 0 10px;
 }
 
 input, select, textarea {
@@ -86,16 +98,13 @@ input[type=checkbox] {
 
 .errorlist li {
     list-style: none;
-    color: red;
+    color: #AF0E11;
 }
 
 #listing {
     width: 100%;
 }
-.edit img {
-    width: 15px;
-}
-.edit {
+.edit img, .edit {
     width: 15px;
 }
 .thumbnails {
@@ -104,4 +113,57 @@ input[type=checkbox] {
 }
 .filters {
     display: none;
+}
+
+#tree {
+    position:absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    overflow:hidden;
+    z-index: 10;
+}
+#tree .img-ctn, #tree .tree-node span {
+    float: left;
+    padding: 2px;
+    height: 50px;
+    width: 50px;
+}
+#tree span+.img-ctn {
+    text-align: right;
+}
+#tree .tree-node span {
+    width: 100px;
+    padding-top: 6px 1px 0 1px;
+    text-align: center;
+}
+.tree-node, #tip {
+    font-size: x-small;
+}
+#tip {
+    opacity: 0.85;
+    display: none;
+    width: 300px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    padding-top: 34px;
+    border: solid 1px black;
+    border-bottom-right-radius: 6px;
+    background-color: #eee;
+}
+#tip .img-ctn {
+    width: 140px;
+    height: 140px;
+    float: left;
+}
+#tip div+div {
+    border-top: solid 1px black;
+    clear: both;
+}
+#tip p {
+    margin: 0 4px;
+    padding-top: 5px;
 }

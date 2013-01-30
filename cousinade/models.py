@@ -5,7 +5,14 @@ from django.utils import timezone, formats
 from lib.thumbs import ImageWithThumbsField
 
 
+class PersonManager(models.Manager):
+    def children(self, p1, p2):
+        # The father__in=(p1,p2) approach does not work with p1 or p2 = None
+        return Person.objects.filter(mother=p1, father=p2) | Person.objects.filter(father=p1, mother=p2)
+
 class Person(models.Model):
+    objects = PersonManager()
+
     TITLE_MISS = 1
     TITLE_MRS = 2
     TITLE_MR = 3
@@ -19,8 +26,6 @@ class Person(models.Model):
         (TITLE_MRS, 'Mme'),
         (TITLE_MR, 'M.'),
     )
-    PICTURE_THUMBNAILS = ((50,50), (200,200), (400,400))
-
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     maiden_name = models.CharField(max_length=100, blank=True, null=True)
@@ -32,7 +37,7 @@ class Person(models.Model):
     phone2 = models.CharField(max_length=30, blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True)
     birth_place = models.CharField(max_length=200, blank=True, null=True)
-    picture = ImageWithThumbsField(upload_to='pictures', sizes=PICTURE_THUMBNAILS, blank=True, null=True)
+    picture = ImageWithThumbsField(upload_to='pictures', blank=True, null=True)
     father = models.ForeignKey(
         'self',
         related_name='+',
@@ -53,9 +58,11 @@ class Person(models.Model):
     password = models.CharField(max_length=128, blank=True)
     last_login = models.DateTimeField(default=timezone.now)
 
-
-    def children(self):
-        return Person.objects.filter(father=self) + Person.objects.filter(mother=self)
+    def partners(self):
+        ret = set()
+        for p in (Person.objects.filter(father=self) | Person.objects.filter(mother=self)).select_related():
+            ret.add(p.father if p.mother == self else p.mother)
+        return ret
 
     def set_password(self, raw_password):
         self.password = make_password(raw_password)

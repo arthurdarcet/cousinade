@@ -19,7 +19,7 @@
     <body>
         {% if request.user %}
             <ul class="nav-bar">
-                <!--<li><a href="{% url cousinade.views.tree %}">Vue en arbre</a></li>-->
+                <li><a href="{% url cousinade.views.tree %}">Vue en arbre</a></li>
                 <li><a href="{% url cousinade.views.index %}">Vue en liste</a></li>
                 <li><a href="{% url cousinade.views.edit %}">Ajouter une personne</a></li>
                 <li><a href="{% url cousinade.views.do_password_reset %}">Changer de mot de passe</a></li>
@@ -27,16 +27,20 @@
                 {% block last_menu_li %}<li></li>{% endblock %}
             </ul>
         {% endif %}
-        <div id="content">
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
         {% block body %}
-        {% endblock %}
+        <div id="content-wrap">
+            <div id="content">
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {% block content %}
+                {% endblock %}
+            </div>
         </div>
+        {% endblock %}
     </body>
 </html>
