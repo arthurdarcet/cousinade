@@ -72,6 +72,8 @@ class ImageWithThumbsFieldFile(ImageFieldFile):
         s = attr.split('url_')
         if len(s) != 2 or 'x' not in s[1]:
             raise AttributeError
+        if not self.name:
+            raise AttributeError('The picture has no file associated with it.')
         size = map(int, s[1].split('x',1))
         name = ImageWithThumbsFieldFile._get_for_size(self.name, size)
         url = ImageWithThumbsFieldFile._get_for_size(self.url, size)

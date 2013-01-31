@@ -65,10 +65,11 @@
                         '<p>' + node.name.infos[1] + '</p>' +
                     '</div>';
                     $('#tip').html(html);
+                    $('#tip').stop(true);
                     $('#tip').show();
                 },
                 onHide: function() {
-                    $('#tip').hide();
+                    $('#tip').delay(300).hide();
                 }
             },
             onCreateLabel: function(label, node){

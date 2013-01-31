@@ -141,6 +141,9 @@ input[type=checkbox] {
 .tree-node, #tip {
     font-size: x-small;
 }
+.tree-node {
+    cursor: pointer;
+}
 #tip {
     opacity: 0.85;
     display: none;
