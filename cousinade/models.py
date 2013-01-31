@@ -11,6 +11,8 @@ class PersonManager(models.Manager):
         return Person.objects.filter(mother=p1, father=p2) | Person.objects.filter(father=p1, mother=p2)
 
 class Person(models.Model):
+    class Meta:
+        ordering = ['last_name', 'first_name']
     objects = PersonManager()
 
     TITLE_MISS = 1
