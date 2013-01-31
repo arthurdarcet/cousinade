@@ -84,4 +84,7 @@ class Person(models.Model):
         return bdate or '−'
 
     def __unicode__(self):
+        return u'{} {}'.format(self.last_name, self.first_name)
+
+    def name(self):
         return u'{} {}'.format(self.first_name, self.last_name)
