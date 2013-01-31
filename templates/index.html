@@ -3,7 +3,7 @@
     {{ block.super }}
     <script type="text/javascript">
         $(document).ready(function(){
-            $("#listing").tablesorter({
+            $('#listing').tablesorter({
                 widgets: ['zebra'],
                 sortList: [[3,0], [2,0]],
                 widthFixed : true
@@ -14,7 +14,7 @@
                 enableCookies: false,
                 clearFiltersControls: [$('#search-reset')]
             });
-            $(".thumbnails a").lightBox();
+            $('.thumbnails a').lightBox();
             $('.info').click(function(){
                 $(this).html($(this).data('all'));
             });

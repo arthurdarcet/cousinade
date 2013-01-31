@@ -6,6 +6,17 @@
 <script type="text/javascript">
     var json = {% tree objects %};
     var st;
+    function search(val, data){
+        for(var i=0; i<data.length; i++) {
+            for(var j=0; j<data[i].name.names.length; j++)
+                if(data[i].name.names[j].toLowerCase().search(val) >= 0)
+                    return data[i].id;
+            rec = search(val, data[i].children);
+            if(rec !== -1)
+                return rec;
+        }
+        return -1;
+    }
     $(document).ready(function(){
         st = new $jit.ST({
             injectInto: 'tree',
@@ -93,6 +104,12 @@
         st.compute();
         st.canvas.translate(0,-100);
         st.onClick(st.root);
+
+        $('#search-field').keyup(function(){
+            var id = search($(this).val().toLowerCase(), json);
+            if(id !== -1)
+                st.select(id);
+        });
     });
 </script>
 {% endblock %}
