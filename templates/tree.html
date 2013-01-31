@@ -79,11 +79,11 @@
                     return;
                 }
                 var img1, img2, name1, name2;
-                img1 = '<div class="img-ctn"><img class="id_thumb" src="' + node.name.images[0] + '" /></div>';
+                img1 = '<div class="img-ctn"><img src="' + node.name.images[0] + '" /></div>';
                 name1 = node.name.names[0];
                 img2 = name2 = '';
                 if(node.name.height == 2){
-                    img2 = '<div class="img-ctn"><img class="id_thumb" src="' + node.name.images[1] + '" /></div>';
+                    img2 = '<div class="img-ctn"><img src="' + node.name.images[1] + '" /></div>';
                     name2 = '<br />' + node.name.names[1];
                 }
                 label.innerHTML = '<div class="tree-node">' + img1 + '<span>' + name1 + name2 + '</span>' + img2 + '</div>';

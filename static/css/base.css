@@ -130,6 +130,11 @@ input[type=checkbox] {
     height: 50px;
     width: 50px;
 }
+#tree .img-ctn img[src=''] {
+    height: 48px;
+    width: 48px;
+    border: solid 1px black;
+}
 #tree span+.img-ctn {
     text-align: right;
 }
