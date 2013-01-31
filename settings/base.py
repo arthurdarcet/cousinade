@@ -68,3 +68,41 @@ LOGOUT_REDIRECT_URL = '/'
 SESSION_EXPIRE = 60*20
 
 EMAIL_SUBJECT_PREFIX = '[Cousinade admin] '
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s : %(levelname)s : %(module)s : %(message)s',
+            'datefmt': '%d %b %Y %H:%M:%S',
+        },
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        },
+    },
+    'handlers': {
+        'mail_admins': {
+            'class': 'django.utils.log.AdminEmailHandler',
+            'level': 'ERROR',
+            'include_html': True,
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'level': 'INFO',
+            'filename': os.path.join(SRC_ROOT, 'logfile'),
+        },
+    },
+    'loggers': {
+        'root': {
+            'handlers': ['file', 'mail_admins'],
+            'filters': ['require_debug_false'],
+        },
+        'cousinade': {
+            'handlers': ['file', 'mail_admins'],
+            'filters': ['require_debug_false'],
+        }
+    }
+}
