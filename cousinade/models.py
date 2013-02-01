@@ -8,7 +8,8 @@ from lib.thumbs import ImageWithThumbsField
 class PersonManager(models.Manager):
     def children(self, p1, p2):
         # The father__in=(p1,p2) approach does not work with p1 or p2 = None
-        return Person.objects.filter(mother=p1, father=p2) | Person.objects.filter(father=p1, mother=p2)
+        ret = Person.objects.filter(mother=p1, father=p2) | Person.objects.filter(father=p1, mother=p2)
+        return ret.order_by('birth_date')
 
 class Person(models.Model):
     class Meta:

@@ -46,23 +46,23 @@
                 offsetY: 10,
                 onShow: function(tip, node) {
                     var html = '<div>' +
-                        '<div class="img-ctn"><img src="' + node.name.images_large[0] + '" /></div>' +
-                        '<p>' + node.name.names[0] + '</p>' +
-                        '<p>' + node.name.maiden_names[0] + '</p>' +
-                        '<p>' + node.name.birth_dates[0] + '</p>' +
-                        '<p>' + node.name.phones[0] + '</p>' +
-                        '<p><a href="mailto:' + node.name.emails[0] + '">' + node.name.emails[0] + '</a></p>' +
-                        '<p>' + node.name.infos[0] + '</p>' +
+                        '<div class="img-ctn"><img src="' + decodeURIComponent(node.name.images_large[0]) + '" /></div>' +
+                        '<p>' + decodeURIComponent(node.name.names[0]) + '</p>' +
+                        '<p>' + decodeURIComponent(node.name.maiden_names[0]) + '</p>' +
+                        '<p>' + decodeURIComponent(node.name.birth_dates[0]) + '</p>' +
+                        '<p>' + decodeURIComponent(node.name.phones[0]) + '</p>' +
+                        '<p><a href="mailto:' + decodeURIComponent(node.name.emails[0]) + '">' + decodeURIComponent(node.name.emails[0]) + '</a></p>' +
+                        '<p>' + decodeURIComponent(node.name.infos[0]) + '</p>' +
                     '</div>';
                     if(node.name.height == 2)
                     html += '<div>' +
-                        '<div class="img-ctn"><img src="' + node.name.images_large[1] + '" /></div>' +
-                        '<p>' + node.name.names[1] + '</p>' +
-                        '<p>' + node.name.maiden_names[1] + '</p>' +
-                        '<p>' + node.name.birth_dates[1] + '</p>' +
-                        '<p>' + node.name.phones[1] + '</p>' +
-                        '<p><a href="mailto:' + node.name.emails[1] + '">' + node.name.emails[1] + '</a></p>' +
-                        '<p>' + node.name.infos[1] + '</p>' +
+                        '<div class="img-ctn"><img src="' + decodeURIComponent(node.name.images_large[1]) + '" /></div>' +
+                        '<p>' + decodeURIComponent(node.name.names[1]) + '</p>' +
+                        '<p>' + decodeURIComponent(node.name.maiden_names[1]) + '</p>' +
+                        '<p>' + decodeURIComponent(node.name.birth_dates[1]) + '</p>' +
+                        '<p>' + decodeURIComponent(node.name.phones[1]) + '</p>' +
+                        '<p><a href="mailto:' + decodeURIComponent(node.name.emails[1]) + '">' + decodeURIComponent(node.name.emails[1]) + '</a></p>' +
+                        '<p>' + decodeURIComponent(node.name.infos[1]) + '</p>' +
                     '</div>';
                     $('#tip').html(html);
                     $('#tip').stop(true);
@@ -79,12 +79,12 @@
                     return;
                 }
                 var img1, img2, name1, name2;
-                img1 = '<div class="img-ctn"><img src="' + node.name.images[0] + '" /></div>';
-                name1 = node.name.names[0];
+                img1 = '<div class="img-ctn"><img src="' + decodeURIComponent(node.name.images[0]) + '" /></div>';
+                name1 = decodeURIComponent(node.name.names[0]);
                 img2 = name2 = '';
                 if(node.name.height == 2){
-                    img2 = '<div class="img-ctn"><img src="' + node.name.images[1] + '" /></div>';
-                    name2 = '<br />' + node.name.names[1];
+                    img2 = '<div class="img-ctn"><img src="' + decodeURIComponent(node.name.images[1]) + '" /></div>';
+                    name2 = '<br />' + decodeURIComponent(node.name.names[1]);
                 }
                 label.innerHTML = '<div class="tree-node">' + img1 + '<span>' + name1 + name2 + '</span>' + img2 + '</div>';
                 label.onclick = function(){
