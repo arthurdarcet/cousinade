@@ -1,9 +1,15 @@
 # coding: utf-8
+import logging
+
 from django.contrib.auth.hashers import check_password, make_password
 from django.db import models
+from django.dispatch import receiver
 from django.utils import timezone, formats
+
 from lib.thumbs import ImageWithThumbsField
 
+
+logger = logging.getLogger(__name__)
 
 class PersonManager(models.Manager):
     def children(self, p1, p2):
@@ -89,3 +95,8 @@ class Person(models.Model):
 
     def name(self):
         return u'{} {}'.format(self.first_name, self.last_name)
+
+
+@receiver(models.signals.post_save)
+def log_changes(sender, instance, *args, **kwargs):
+    logger.info('%s model saved by %s', instance, sender)
