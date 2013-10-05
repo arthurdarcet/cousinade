@@ -6,8 +6,8 @@ from django.core.mail import send_mail
 from django.template import loader
 from django.utils.http import int_to_base36
 
-from auth import Backend
-from models import Person
+from .auth import Backend
+from .models import Person
 
 class PersonForm(forms.ModelForm):
     class Meta:

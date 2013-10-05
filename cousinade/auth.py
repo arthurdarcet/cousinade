@@ -8,7 +8,7 @@ from django.contrib.auth import SESSION_KEY
 from django.utils.functional import SimpleLazyObject
 from django.shortcuts import redirect
 
-from models import Person
+from .models import Person
 
 
 EXEMPT_URLS = [compile(settings.LOGIN_URL.lstrip('/'))]

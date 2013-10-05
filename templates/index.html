@@ -50,8 +50,8 @@
     {% for o in objects %}
     <tr>
         <td class="edit">
-            <a href="{% url cousinade.views.edit o.id %}">
-                <img src="{{ STATIC_URL }}/images/edit.png" alt="edit" />
+            <a href="{% url "cousinade.views.edit" o.id %}">
+                <img src="{{ STATIC_URL }}images/edit.png" alt="edit" />
             </a>
             <span style="display: none;">{{ o.name }}</span>
         </td>

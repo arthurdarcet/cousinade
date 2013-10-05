@@ -1,4 +1,4 @@
 try:
-    from personal import *
+    from .personal import *
 except ImportError:
-    from dev import *
+    from .dev import *

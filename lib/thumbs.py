@@ -9,7 +9,7 @@ from django.db.models import ImageField
 from django.db.models.fields.files import ImageFieldFile
 from PIL import Image
 from django.core.files.base import ContentFile
-import cStringIO, re
+import io, re
 
 def generate_thumb(img, thumb_size, format):
     """
@@ -54,7 +54,7 @@ def generate_thumb(img, thumb_size, format):
         image2 = image
         image2.thumbnail(thumb_size, Image.ANTIALIAS)
 
-    io = cStringIO.StringIO()
+    io = io.StringIO()
     # PNG and GIF are the same, JPG is JPEG
     if format.upper()=='JPG':
         format = 'JPEG'
@@ -64,7 +64,7 @@ def generate_thumb(img, thumb_size, format):
 
 class ImageWithThumbsFieldFile(ImageFieldFile):
     @staticmethod
-    def _get_for_size(s, (w,h)):
+    def _get_for_size(s, w, h):
         split = s.rsplit('.',1)
         return u'{}.{}x{}.{}'.format(split[0],w,h,split[1])
 
@@ -74,9 +74,10 @@ class ImageWithThumbsFieldFile(ImageFieldFile):
             raise AttributeError
         if not self.name:
             raise AttributeError('The picture has no file associated with it.')
-        size = map(int, s[1].split('x',1))
-        name = ImageWithThumbsFieldFile._get_for_size(self.name, size)
-        url = ImageWithThumbsFieldFile._get_for_size(self.url, size)
+        size = s[1].split('x',1)
+        w, h = int(size[0]), int(size[1])
+        name = ImageWithThumbsFieldFile._get_for_size(self.name, w, h)
+        url = ImageWithThumbsFieldFile._get_for_size(self.url, w, h)
         if not self.storage.exists(name):
             thumb_content = generate_thumb(self, size, name.rsplit('.',1)[1])
             self.storage.save(name, thumb_content)

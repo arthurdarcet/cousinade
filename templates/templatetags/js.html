@@ -1,7 +1,5 @@
-{% load compress static %}
+{% load static %}
 
-{% compress js %}
-    {% for o in l %}
-        <script type="text/{{ o.mime }}" src="{% static o.extension|add:"/"|add:o.path %}" charset="utf-8"></script>
-    {% endfor %}
-{% endcompress %}
+{% for o in l %}
+    <script type="text/{{ o.mime }}" src="{% static o.extension|add:"/"|add:o.path %}" charset="utf-8"></script>
+{% endfor %}

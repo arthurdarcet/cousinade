@@ -3,5 +3,4 @@ media/
 static/CACHE
 *.pyc
 *.db
-env/
-logfile
+.venv/

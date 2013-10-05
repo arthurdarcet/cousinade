@@ -10,15 +10,17 @@ TIME_ZONE = 'Europe/Paris'
 LANGUAGE_CODE = 'fr-fr'
 USE_L10N = True
 
-STATIC_ROOT = os.path.join(SRC_ROOT, 'static')
-STATIC_URL = '/static/'
 # static for our static files, media for user-uploaded pictures
 MEDIA_ROOT = os.path.join(SRC_ROOT, 'media')
 MEDIA_URL = '/media/'
 
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(SRC_ROOT, 'static'),
+)
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
-    'compressor.finders.CompressorFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
 SECRET_KEY = 'rezk$80u7u1+n+61arn5))z%8&amp;vhg@^sg71j!o+a4evjq*e6!7'
@@ -56,8 +58,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
-    'compressor',
-    'django_tables2',
     'cousinade',
 )
 
@@ -69,13 +69,15 @@ SESSION_EXPIRE = 60*20
 
 EMAIL_SUBJECT_PREFIX = '[Cousinade admin] '
 
+
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
     'formatters': {
-        'standard': {
-            'format': '%(asctime)s : %(levelname)s : %(module)s : %(message)s',
-            'datefmt': '%d %b %Y %H:%M:%S',
+        'simple': {
+            'format': '{asctime} | {name:^12} | {levelname:^8} | {message}',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
+            'style': '{',
         },
     },
     'filters': {
@@ -84,25 +86,26 @@ LOGGING = {
         },
     },
     'handlers': {
+        'console':{
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
         'mail_admins': {
             'class': 'django.utils.log.AdminEmailHandler',
             'level': 'ERROR',
             'include_html': True,
-        },
-        'file': {
-            'class': 'logging.FileHandler',
-            'level': 'INFO',
-            'filename': os.path.join(SRC_ROOT, 'logfile'),
+            'filters': ['require_debug_false'],
         },
     },
     'loggers': {
         'root': {
-            'handlers': ['file', 'mail_admins'],
-            'filters': ['require_debug_false'],
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
         },
         'cousinade': {
-            'handlers': ['file', 'mail_admins'],
-            'filters': ['require_debug_false'],
-        }
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
     }
 }

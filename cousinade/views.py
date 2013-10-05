@@ -1,6 +1,5 @@
 # coding: utf-8
 from collections import defaultdict
-from urlparse import urlparse
 
 from django.conf import settings
 from django.contrib import messages
@@ -10,9 +9,9 @@ from django.shortcuts import render, redirect
 from django.utils.http import base36_to_int
 from django.views.decorators.debug import sensitive_post_parameters
 
-from auth import Backend
-from forms import PersonForm, AuthenticationForm, PasswordResetForm, PasswordResetRequestForm
-from models import Person
+from .auth import Backend
+from .forms import PersonForm, AuthenticationForm, PasswordResetForm, PasswordResetRequestForm
+from .models import Person
 
 
 def index(request):

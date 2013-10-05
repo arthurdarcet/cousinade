@@ -1,3 +1,2 @@
-django
-pil
-django_compressor
+django>=1.5
+http://hg.effbot.org/pil-2009-raclette/downloads/PIL-1.2a0-20110108.tar.gz#egg=pil
